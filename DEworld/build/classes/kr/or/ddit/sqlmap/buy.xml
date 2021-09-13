@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="buy">
+
+	
+	
+	<select id="getBuyAll" parameterClass="kr.or.ddit.buy.vo.BuyVO"  resultClass="kr.or.ddit.buy.vo.BuyVO">
+		SELECT 
+			i.ITEM_ID				itemId,
+			i.LITEM_GU            	litemGu,
+			i.ITEM_NAME           	itemName,	
+			i.ITEM_IMG            	itemImg,	
+			i.ITEM_PRICE			itemPrice
+		FROM item i, item_collection g
+		where i.item_ID = g.item_ID and i.LITEM_GU != '03'
+		and g.mem_id = #memId#
+	</select>
+
+	<select id="getMusicBuyAll" parameterClass="kr.or.ddit.buy.vo.BuyVO"  resultClass="kr.or.ddit.buy.vo.BuyVO">
+		SELECT 
+		    m.MUSIC_ID 			musicId,
+		    l.LMUSIC_GU			lmusicGu,
+		    l.LMUSIC_GENRE		lmusicGenre,
+		    MUSIC_ALBUM			musicAlbum,
+		    MUSIC_TITLE			musicTitle,
+		    MUSIC_DESC			musicDesc,
+		    MUSIC_ARTIST		musicArtist,
+		    MUSIC_PATH			musicPath,
+		    MUSIC_COST			musicCost,
+		    MUSIC_TIME			musicTime
+		FROM music m , lmusic l, music_collection w
+		where m.lmusic_gu = l.lmusic_gu and m.music_id = w.music_ID
+		and w.mem_id = #memId#
+	</select>
+	
+</sqlMap>			
+
+
+
+

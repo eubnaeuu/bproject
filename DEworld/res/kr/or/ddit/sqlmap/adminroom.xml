@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="adminroom">
+
+	
+	<select id="getSearchMember" parameterClass="kr.or.ddit.adminroom.member.vo.MemberVO"
+	resultClass="kr.or.ddit.adminroom.member.vo.MemberVO">
+		SELECT 
+		MEM_ID				memId
+		,MEM_NAME			memName
+		,MEM_NICKNAME		memNickname
+		FROM MEMBER
+		ORDER BY MEM_NAME 
+	</select>
+	
+	<select id="getSearchMemberName" parameterClass="kr.or.ddit.adminroom.member.vo.MemberVO"
+	resultClass="kr.or.ddit.adminroom.member.vo.MemberVO">
+		SELECT 
+		MEM_ID				memId
+		,MEM_NAME			memName
+		,MEM_NICKNAME		memNickname
+		FROM MEMBER 
+		WHERE 1=1 
+		<isNotEmpty>
+		AND MEM_NAME LIKE '%'||#memName#||'%'
+		</isNotEmpty>
+		ORDER BY MEM_NAME 
+	</select>
+
+	<select id="getSearchMemberNickname"
+		parameterClass="kr.or.ddit.adminroom.member.vo.MemberVO"
+		resultClass="kr.or.ddit.adminroom.member.vo.MemberVO">
+		SELECT
+		MEM_ID memId
+		,MEM_NAME memName
+		,MEM_NICKNAME memNickname
+		FROM MEMBER
+		WHERE 1=1 
+		<isNotEmpty>
+		AND MEM_NICKNAME LIKE '%'||#memNickname#||'%'
+		</isNotEmpty>
+		ORDER BY MEM_NAME
+	</select>
+
+	<select id="getSearchMemberId"
+		parameterClass="kr.or.ddit.adminroom.member.vo.MemberVO"
+		resultClass="kr.or.ddit.adminroom.member.vo.MemberVO">
+		SELECT
+		MEM_ID memId
+		,MEM_NAME memName
+		,MEM_NICKNAME memNickname
+		FROM MEMBER
+		WHERE 1=1 
+		<isNotEmpty>
+		AND MEM_ID LIKE '%'||#memId#||'%'
+		</isNotEmpty>
+		ORDER BY MEM_NAME
+	</select>
+
+	
+</sqlMap>
